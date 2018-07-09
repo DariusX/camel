@@ -471,6 +471,18 @@ public class UserPojo {
 By having the JAXB annotations the POJO supports both json and xml
 bindings.
 
+=== Configuring Rest DSL
+[width="100%",cols="20%,10%,30%",options="header",]
+|===
+|Option |Default |Description
+
+|component | |The Camel Rest component to use for the REST transport, such as restlet, spark-rest.
+|===
+
+
+If no component has been explicit configured, then Camel will lookup if there is a Camel component that integrates with the Rest DSL, or if a org.apache.camel.spi.RestConsumerFactory is registered in the registry. If either one is found, then that is being used.
+
+
 You can configure properties on these levels. 
 
 * component - Is used to set any options on the Component class. You can
