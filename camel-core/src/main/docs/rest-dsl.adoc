@@ -476,8 +476,37 @@ bindings.
 |===
 |Option |Default |Description
 
-|component | |The Camel Rest component to use for the REST transport, such as restlet, spark-rest.
+|component | |.
+|scheme | http|.
+|hostname | |.
+|port | |
+|contextPath | |.
+|restHostNameResolver | |.
+|bindingMode | off|.
+|skipBindingOnErrorCode |true |.
+|enableCORS |false |.
+|jsonDataFormat | |.
+|xmlDataFormat | |.
+|componentProperty | |.
+|endpointProperty | |.
+|consumerProperty | |.
+|dataFormatProperty | |.
+|corsHeaderProperty | |.
 |===
+
+
+For example to configure to use the spark-rest component on port 9091, then we can do as follows:
+
+restConfiguration().component("spark-rest").port(9091).componentProperty("foo", "123");
+
+
+And with XML DSL
+
+<restConfiguration component="spark-rest" port="9091"> 
+  <componentProperty key="foo" value="123"/>
+</restConfiguration>
+
+
 
 
 If no component has been explicit configured, then Camel will lookup if there is a Camel component that integrates with the Rest DSL, or if a org.apache.camel.spi.RestConsumerFactory is registered in the registry. If either one is found, then that is being used.
