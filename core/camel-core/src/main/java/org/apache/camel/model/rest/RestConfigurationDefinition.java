@@ -59,6 +59,9 @@ public class RestConfigurationDefinition {
     @XmlAttribute
     private String apiHost;
 
+    @XmlAttribute @Metadata(defaultValue = "true")
+    private Boolean useXForwardHeaders;
+
     @XmlAttribute
     private String port;
 
@@ -787,6 +790,14 @@ public class RestConfigurationDefinition {
         return corsHeaderProperty("Access-Control-Allow-Credentials", String.valueOf(corsAllowCredentials));
     }
 
+    /**
+     * To specify whether to use X-Forward headers for Host and related setting
+     */
+    public RestConfigurationDefinition useXForwardHeaders(boolean useXForwardHeaders) {
+        setUseXForwardHeaders(useXForwardHeaders);
+        return this;
+    }
+
 
     // Implementation
     //-------------------------------------------------------------------------
@@ -922,7 +933,23 @@ public class RestConfigurationDefinition {
             }
             answer.setCorsHeaders(props);
         }
+        if (useXForwardHeaders != null) {
+            answer.setUseXForwardHeaders(useXForwardHeaders);
+        }
         return answer;
+    }
+
+    public Boolean getUseXForwardHeaders() {
+        return useXForwardHeaders;
+    }
+
+    /**
+     * Whether to use X-Forward headers for Host and related setting.
+     * <p/>
+     * The default value is true.
+     */
+    public void setUseXForwardHeaders(Boolean useXForwardHeaders) {
+        this.useXForwardHeaders = useXForwardHeaders;
     }
 
 }
